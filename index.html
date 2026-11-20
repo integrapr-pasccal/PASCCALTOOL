@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INTEGRAPR &middot; PASCCAL</title>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://ezfhlucdojapxipxqrec.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://ezfhlucdojapxipxqrec.supabase.co; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src blob:">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -735,6 +735,82 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   .edit-add-field textarea{resize:vertical;min-height:60px;}
 
+
+  /* Reuniones y Minutas */
+  .min-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px;align-items:start;}
+  .min-cal-card,.min-day-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;}
+  .min-cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .min-month{font-weight:700;color:var(--navy);font-size:17px;}
+  .min-nav{background:var(--bg);border:none;border-radius:50%;width:34px;height:34px;color:var(--navy);font-size:18px;line-height:1;}
+  .min-nav:hover{background:var(--surface);}
+  .min-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center;}
+  .min-dow{font-size:11px;color:var(--text-muted);text-transform:uppercase;padding:6px 0;font-weight:700;}
+  .min-day{position:relative;border:none;background:transparent;border-radius:12px;padding:11px 0;font-size:14px;color:var(--navy);}
+  .min-day:hover{background:var(--bg);}
+  .min-day.out{color:var(--text-muted);}
+  .min-day.today{box-shadow:inset 0 0 0 1.5px var(--accent);}
+  .min-day.sel{background:var(--accent);color:#fff;font-weight:700;}
+  .min-day.has::after{content:"";position:absolute;bottom:5px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--accent);}
+  .min-day.sel.has::after{background:#fff;}
+  .min-cal-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-size:12px;color:var(--text-muted);gap:10px;}
+  .min-link{background:none;border:none;color:var(--accent);font-weight:700;font-size:13px;}
+  .min-day-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+  .min-day-head h3{font-size:17px;}
+  .min-btn-primary{background:var(--accent);color:#fff;border:none;border-radius:var(--radius-pill);padding:10px 18px;font-weight:700;font-size:13px;}
+  .min-btn-primary:hover{filter:brightness(1.08);}
+  .min-btn-sec{background:var(--bg);color:var(--navy);border:none;border-radius:var(--radius-pill);padding:8px 14px;font-weight:700;font-size:12px;}
+  .min-btn-sec:hover{background:var(--surface);}
+  .min-btn-danger{background:var(--danger-bg);color:var(--danger-text);}
+  .min-card{background:var(--bg);border-radius:16px;padding:16px 18px;margin-bottom:12px;}
+  .min-card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:6px;}
+  .min-card-title{font-weight:700;color:var(--navy);font-size:15px;}
+  .min-tag{background:var(--surface);color:var(--accent);border-radius:var(--radius-pill);padding:3px 10px;font-size:12px;font-weight:700;white-space:nowrap;}
+  .min-lbl{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin:12px 0 4px;}
+  .min-txt{font-size:13.5px;line-height:1.55;white-space:pre-wrap;word-break:break-word;}
+  .min-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+  .min-empty{color:var(--text-muted);font-size:14px;padding:18px 4px;}
+  .min-modal{position:fixed;inset:0;background:rgba(30,39,73,.55);z-index:900;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .min-modal-box{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 28px;width:100%;max-width:520px;max-height:92vh;overflow:auto;}
+  .min-modal-box.wide{max-width:980px;height:90vh;display:flex;flex-direction:column;padding:18px 22px;}
+  .min-modal-box h3{margin-bottom:6px;}
+  .min-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--text-muted);margin:14px 0 6px;}
+  .min-field input[type=text],.min-field input[type=time],.min-field textarea{width:100%;border:1px solid var(--border);border-radius:14px;padding:11px 14px;font-family:inherit;font-size:14px;color:var(--navy);background:#fff;}
+  .min-field textarea{resize:vertical;min-height:70px;}
+  .min-field input:disabled{background:var(--bg);}
+  .min-row2{display:grid;grid-template-columns:1.8fr 1fr;gap:12px;}
+  .min-req{color:#D93025;font-weight:700;}
+  .min-field input[type=text]#minFechaIn{font-size:13px;padding:11px 12px;}
+  .min-drop{border:1.5px dashed #C6CEEF;border-radius:16px;padding:18px;text-align:center;font-size:13px;color:var(--text-muted);cursor:pointer;}
+  .min-drop.drag,.min-drop:hover{background:var(--bg);}
+  .min-drop b{color:var(--navy);}
+  .min-err{color:var(--danger-text);font-size:13px;font-weight:700;margin-top:10px;min-height:18px;}
+  .min-form-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;}
+  .min-pdf-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;}
+  .min-pdf-frame{flex:1;width:100%;border:none;border-radius:12px;background:var(--bg);}
+  .content-inner.wide{max-width:1320px;}
+  .min-layout{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);}
+  .min-cal-card{padding:26px 28px;}
+  .min-month{font-size:22px;}
+  .min-dow{font-size:12px;}
+  .min-grid{gap:6px;}
+  .min-day{min-height:108px;padding:8px 8px 6px;text-align:left;display:flex;flex-direction:column;gap:3px;align-items:stretch;border:1px solid var(--border);background:#fff;border-radius:14px;}
+  .min-day:hover{background:var(--bg);}
+  .min-day.out{background:#FAFBFE;}
+  .min-day.sel{background:var(--accent);border-color:var(--accent);}
+  .min-day.has::after{display:none;}
+  .min-dn{font-size:15px;font-weight:700;}
+  .min-chip{display:block;font-size:11px;font-weight:700;background:var(--surface);color:var(--accent);border-radius:8px;padding:2px 6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .min-day.sel .min-chip{background:rgba(255,255,255,.22);color:#fff;}
+  .min-more{font-size:11px;color:var(--text-muted);padding-left:2px;}
+  .min-day.sel .min-more{color:#fff;}
+  @media (max-width:700px){.min-day{min-height:56px;padding:6px 4px;align-items:center;}.min-chip,.min-more{display:none;}.min-day.has::after{display:block;}}
+  .min-dmeta{color:var(--text-muted);font-size:13px;margin-bottom:4px;}
+  .min-pdf-frame.embedded{display:block;height:calc(100vh - 140px);min-height:620px;}
+  .min-item{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg);border-radius:16px;padding:14px 18px;margin-bottom:10px;}
+  .min-item-title{font-weight:700;color:var(--navy);font-size:15px;}
+  .min-item-sub{font-size:12px;color:var(--text-muted);margin-top:2px;}
+  @media (max-width:980px){.min-layout{grid-template-columns:1fr;}}
+
   ::-webkit-scrollbar{width:9px;height:9px;}
   ::-webkit-scrollbar-track{background:transparent;}
   ::-webkit-scrollbar-thumb{background:#C6CEEF;border-radius:8px;}
@@ -813,6 +889,10 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     <div class="nav-item" data-nav="proyectos">
       <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
       Proyectos
+    </div>
+    <div class="nav-item" data-nav="minutas">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Reuniones y Minutas
     </div>
     <div class="nav-item" data-nav="admin" id="adminNavItem" style="display:none;">
       <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/><path d="M19.4 13a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V19a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 17.6a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -1049,6 +1129,77 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
           </div>
         </div>
 
+        <div id="minutasView" style="display:none;">
+          <div class="min-layout" id="minListMode">
+            <div class="min-cal-card">
+              <div class="min-cal-head">
+                <button class="min-nav" id="minPrev" type="button" aria-label="Mes anterior">&lsaquo;</button>
+                <div class="min-month" id="minTitle"></div>
+                <button class="min-nav" id="minNext" type="button" aria-label="Mes siguiente">&rsaquo;</button>
+              </div>
+              <div class="min-grid" id="minGrid"></div>
+              <div class="min-cal-foot">
+                <button class="min-link" id="minToday" type="button">Hoy</button>
+                <span>El punto azul marca los días con minutas.</span>
+              </div>
+            </div>
+            <div class="min-day-card">
+              <div class="min-day-head">
+                <h3 id="minDayTitle"></h3>
+                <button class="min-btn-primary" id="minAddBtn" type="button" style="display:none;">+ Añadir minuta</button>
+              </div>
+              <div id="minDayList"></div>
+            </div>
+          </div>
+          <div class="min-modal" id="minFormModal" style="display:none;">
+            <div class="min-modal-box">
+              <h3 id="minFormTitle">Añadir minuta</h3>
+              <div class="min-field">
+                <label for="minTituloIn">Título de la reunión <span class="min-req">*</span></label>
+                <input type="text" id="minTituloIn" maxlength="200" autocomplete="off">
+                <div class="min-row2">
+                  <div><label for="minFechaIn">Día <span class="min-req">*</span></label><input type="text" id="minFechaIn" disabled></div>
+                  <div><label for="minHoraIn">Hora <span class="min-req">*</span></label><input type="time" id="minHoraIn"></div>
+                </div>
+                <label for="minAutorIn">Nombre de quien la creó y subió <span class="min-req">*</span></label>
+                <input type="text" id="minAutorIn" maxlength="120" autocomplete="off" placeholder="Nombre y apellido">
+                <label for="minNotasIn">Notas (opcional)</label>
+                <textarea id="minNotasIn" maxlength="4000" rows="2"></textarea>
+                <label for="minResumenIn">Resumen (opcional)</label>
+                <textarea id="minResumenIn" maxlength="8000" rows="3" placeholder="Pegue aquí el resumen generado con Claude"></textarea>
+                <label for="minPartIn">Participantes (opcional)</label>
+                <textarea id="minPartIn" maxlength="2000" rows="2" placeholder="Un nombre por línea o separados por coma"></textarea>
+                <label>PDF de la minuta <span class="min-req" id="minPdfReq">*</span></label>
+                <div class="min-drop" id="minDrop"><b id="minDropName">Arrastre el PDF aquí o haga clic para elegirlo</b><div id="minDropSub">Máximo 20 MB</div></div>
+                <input type="file" id="minFileIn" accept="application/pdf,.pdf" style="display:none;">
+              </div>
+              <div class="min-err" id="minErr"></div>
+              <div class="min-form-actions">
+                <button class="min-btn-sec" id="minCancelBtn" type="button">Cancelar</button>
+                <button class="min-btn-primary" id="minSaveBtn" type="button">Guardar minuta</button>
+              </div>
+            </div>
+          </div>
+          <div id="minDetail" style="display:none;">
+            <button class="min-btn-sec" id="minBack" type="button" style="margin-bottom:14px;">&larr; Volver al calendario</button>
+            <div class="min-day-card" style="margin-bottom:16px;">
+              <div class="min-card-top"><h3 id="minDTitle"></h3><span class="min-tag" id="minDHora"></span></div>
+              <div class="min-dmeta" id="minDFecha"></div>
+              <div id="minDBody"></div>
+              <div class="min-actions">
+                <button class="min-btn-sec" id="minDDl" type="button">Descargar PDF</button>
+                <button class="min-btn-sec" id="minDEdit" type="button" style="display:none;">Editar</button>
+                <button class="min-btn-sec min-btn-danger" id="minDDel" type="button" style="display:none;">Eliminar</button>
+              </div>
+            </div>
+            <div class="min-day-card" style="padding:14px;">
+              <div class="min-lbl" style="margin-top:0;">Minuta (PDF)</div>
+              <div class="min-empty" id="minDLoad">Cargando PDF…</div>
+              <iframe class="min-pdf-frame embedded" id="minDFrame" title="Minuta en PDF"></iframe>
+            </div>
+          </div>
+        </div>
+
         <div id="adminView" style="display:none;">
           <div class="presence-bar">
             <div>
@@ -1249,7 +1400,7 @@ const MODULE_DATA = {
   pas: [],
   proyectos: []
 };
-const MODULES = {"inicio": {"label": "Inicio", "viewType": "home", "subLabel": "Bienvenido(a) a PASCCAL"}, "agencias": {"label": "Agencias", "titleLabel": "Nombre de la Entidad", "searchLabel": "Buscar agencia", "searchPlaceholder": "Escriba el nombre de la agencia…", "subLabel": "Busque una entidad para ver su información fiscal", "nameField": "nombre", "idField": "numEntidad", "stripPrefixRegex": "^\\d{7}\\s*-\\s*", "showClearFiltersButton": true, "copyableNameBox": true, "smallFields": [{"key": "numEntidad", "label": "Número de Entidad", "kind": "plain", "copyable": true}, {"key": "numUnidad", "label": "Número de Unidad", "kind": "plain", "copyable": true}, {"key": "planFiscal", "label": "Plan Fiscal", "kind": "tag"}, {"key": "faseERP", "label": "Fase en ERP", "kind": "tag", "prefix": "Fase "}, {"key": "fondo111", "label": "Recibe Fondo 111", "kind": "tag"}, {"key": "fondo141", "label": "Recibe Fondo 141", "kind": "tag"}, {"key": "fondoSRF", "label": "Recibe Fondos SRF", "kind": "tag"}, {"key": "fondoFed", "label": "Recibe Fondos Fed.", "kind": "tag"}, {"key": "prifas", "label": "Entidad en PRIFAS", "kind": "tag"}, {"key": "rhum", "label": "Entidad en RHUM", "kind": "tag"}, {"key": "ley73", "label": "Entidad bajo Ley 73", "kind": "tag"}, {"key": "ley8", "label": "Entidad bajo Ley 8", "kind": "tag"}, {"key": "remesa", "label": "Recibe Remesa", "kind": "tag", "noStretch": true}], "textFields": [{"key": "comentario", "label": "Comentario"}], "xlsxFilename": "Agencias.xlsx"}, "fondos": {"label": "Fondos", "titleLabel": "Alias del Fondo", "searchLabel": "Buscar fondo", "searchPlaceholder": "Escriba el nombre o número del fondo…", "subLabel": "Busque un fondo para ver su información", "nameField": "alias", "idField": "fondoNum", "stripPrefixRegex": "^\\d+\\s*-\\s*", "showClearFiltersButton": true, "copyableNameBox": true, "smallFields": [{"key": "fondoNum", "label": "Número de Fondo", "kind": "plain", "copyable": true}, {"key": "fondoEPM", "label": "Fondo en EPM", "kind": "tag"}, {"key": "fondoERP", "label": "Fondo en ERP", "kind": "tag", "breakAfter": true}, {"key": "clasifEPM", "label": "Clasificación en EPM", "kind": "tag", "tagClass": "tag-pink"}, {"key": "clasifERP_P1", "label": "Clasificación en ERP (Parent)", "kind": "tag"}, {"key": "clasifERP_C1", "label": "Clasificación en ERP (Child)", "kind": "tag"}], "textFields": [{"key": "leyCreacion", "label": "Ley u Orden de Creación (Original)"}, {"key": "uso", "label": "Uso"}], "xlsxFilename": "Fondos.xlsx"}, "conceptos": {"label": "Conceptos", "viewType": "list", "navGroup": "conceptos", "subLabel": "Listado completo de conceptos presupuestarios", "xlsxFilename": "Conceptos.xlsx", "columns": [{"key": "codigo", "label": "Código"}, {"key": "descripcion", "label": "Descripción"}], "splitCount": 10}, "conceptos_conversion": {"label": "Conversión", "parentLabel": "Conceptos", "navGroup": "conceptos", "titleLabel": "Concepto", "searchLabel": "Buscar concepto", "searchPlaceholder": "Escriba o seleccione un concepto…", "subLabel": "Busque un concepto para ver su conversión a ERP", "nameField": "concepto", "idField": "concepto", "searchMetaField": "conversionERP", "showClearFiltersButton": true, "smallFields": [{"key": "conversionERP", "label": "Conversión ERP", "kind": "plain"}], "xlsxFilename": "Conceptos_Conversion.xlsx"}, "objetos_conversion": {"label": "Conversión de Objetos", "parentLabel": "Objetos", "navGroup": "objetos", "titleLabel": "Objeto", "searchLabel": "Buscar objeto", "searchPlaceholder": "Escriba el nombre del objeto…", "subLabel": "Busque un objeto para ver su información de conversión", "nameField": "objeto", "idField": "oracle", "stripPrefixRegex": "^\\d+\\s*-\\s*", "stripSuffixRegex": "\\s*\\([^)]*\\)\\s*$", "showClearFiltersButton": true, "copyableNameBox": true, "smallFields": [{"key": "oracle", "label": "Código ORACLE", "kind": "plain", "copyable": true}, {"key": "prifas", "label": "Código PRIFAS", "kind": "plain", "copyable": true}, {"key": "tipo", "label": "Tipo", "kind": "tag"}], "xlsxFilename": "Conversion_Objetos.xlsx", "showConversionDiagram": true}, "objetos_reglamento49": {"label": "Reglamento 49", "parentLabel": "Objetos", "navGroup": "objetos", "viewType": "combo", "titleLabel": "Objeto de Gasto", "searchLabel": "Buscar objeto de gasto", "searchPlaceholder": "Escriba el nombre del objeto de gasto…", "subLabel": "Busque un objeto de gasto para ver todas sus combinaciones posibles de concepto", "nameField": "objetoGasto", "idField": "objetoGasto", "searchMetaField": "objetoERP", "stripPrefixRegex": "^\\d+\\s*-\\s*", "stripSuffixRegex": "\\s*\\([^)]*\\)\\s*$", "showClearFiltersButton": true, "copyableNameBox": true, "tableViewKey": "objetos_reglamento49_tabla", "smallFields": [{"key": "objeto", "label": "Objeto", "kind": "plain", "copyable": true}, {"key": "objetoERP", "label": "Objeto ERP", "kind": "plain", "copyable": true}], "comboColumns": [{"key": "concepto", "label": "Concepto"}, {"key": "descripcionConcepto", "label": "Descripción"}], "xlsxFilename": "Reglamento49.xlsx"}, "objetos_reglamento49_tabla": {"label": "Reglamento 49", "parentLabel": "Objetos", "navGroup": "objetos", "pillKey": "objetos_reglamento49", "backKey": "objetos_reglamento49", "viewType": "table", "dataKey": "objetos_reglamento49", "subLabel": "Tabla completa del Reglamento 49 con filtros por columna, como en Excel", "columns": [{"key": "objetoGasto", "label": "Objeto de Gasto", "width": "34%"}, {"key": "objeto", "label": "Objeto", "width": "9%"}, {"key": "objetoERP", "label": "Objeto ERP", "width": "11%"}, {"key": "concepto", "label": "Concepto", "width": "9%"}, {"key": "descripcionConcepto", "label": "Descripción", "width": "37%"}], "xlsxFilename": "Reglamento49.xlsx"}, "objetos_grupos_jsf": {"label": "Grupos JSF", "parentLabel": "Objetos", "navGroup": "objetos", "titleLabel": "Objeto", "subLabel": "Seleccione un objeto y luego un concepto para ver su agrupación JSF", "nameField": "objeto", "idField": "combinacionERP", "stripPrefixRegex": "^$", "stripSuffixRegex": "\\s*\\([^)]*\\)\\s*$", "showClearFiltersButton": true, "copyableNameBox": true, "twoStepFilter": {"level1Field": "objeto", "level1Label": "Buscar objeto", "level1Placeholder": "Escriba el nombre del objeto…", "level1StripPrefixRegex": "^$", "level1MetaField": "objetoERP", "level2Field": "conceptoDisplay", "level2Label": "Buscar concepto", "level2Placeholder": "Escriba o seleccione un concepto…", "level2PlaceholderDisabled": "Primero seleccione un objeto…"}, "smallFields": [{"key": "tipoJSF", "label": "Tipo JSF", "kind": "plain", "copyable": true}, {"key": "grupoJSF", "label": "Grupo JSF", "kind": "plain", "copyable": true}, {"key": "categoriaJSF", "label": "Categoría JSF", "kind": "plain", "copyable": true}], "xlsxFilename": "Grupos_JSF.xlsx"}, "objetos_grupos_jsf_listado": {"label": "Listado de Grupos JSF", "parentLabel": "Objetos", "navGroup": "objetos", "viewType": "list", "subLabel": "Listado completo de grupos JSF", "xlsxFilename": "Grupos_JSF_Listado.xlsx", "columns": [{"key": "grupo", "label": "Grupo"}, {"key": "descripcion", "label": "Descripción"}], "splitCount": 22}, "cc_agencias": {"label": "Centros de Costo - Agencias", "parentLabel": "Centros de Costo (CC)", "navGroup": "cc", "viewType": "cascade", "subLabel": "Seleccione en orden cada filtro para llegar al código final del centro de costo", "disclaimer": "Este buscador presenta únicamente Centros de Costo específicos de cada entidad, que incluyen Administrativos, Estratégicos y Operacionales.", "resultLabel": "Código Final", "levels": [{"key": "agencia", "label": "Agencia", "placeholder": "Escriba o seleccione una agencia…", "mainField": "agenciaNombre", "metaField": "agenciaCod"}, {"key": "tipo", "label": "Tipo de Componente", "placeholder": "Seleccione el tipo de componente…", "mainField": "tipo", "metaField": "tipoCod"}, {"key": "nivel2", "label": "Unidad Primaria (Nivel 2)", "placeholder": "Seleccione la unidad primaria…", "mainField": "nivel2", "metaField": "nivel2Cod"}, {"key": "nivel3", "label": "Unidad Secundaria (Nivel 3)", "placeholder": "Seleccione la unidad secundaria…", "mainField": "nivel3", "metaField": "nivel3Cod"}, {"key": "nivel4", "label": "Unidad Subsiguiente (Nivel 4)", "placeholder": "Seleccione la unidad subsiguiente…", "mainField": "nivel4", "metaField": "nivel4Cod"}], "resultField": "finalCode", "xlsxFilename": "CC.xlsx"}, "cc_catalogos": {"label": "Catálogos Administrativos y Estratégicos", "parentLabel": "Centros de Costo (CC)", "navGroup": "cc", "viewType": "cascade", "subLabel": "Seleccione en orden cada filtro para llegar al código final del catálogo", "disclaimer": "Este buscador presenta únicamente los Centros de Costo del catálogo Administrativo y Estratégico, que es compartido por todas las agencias.", "resultLabel": "Código Final", "levels": [{"key": "tipo", "label": "Tipo de Componente", "placeholder": "Seleccione el tipo de componente…", "mainField": "tipo", "metaField": "tipoCod"}, {"key": "nivel2", "label": "Unidad Primaria (Nivel 2)", "placeholder": "Seleccione la unidad primaria…", "mainField": "nivel2", "metaField": "nivel2Cod"}, {"key": "nivel3", "label": "Unidad Secundaria (Nivel 3)", "placeholder": "Seleccione la unidad secundaria…", "mainField": "nivel3", "metaField": "nivel3Cod"}, {"key": "nivel4", "label": "Unidad Subsiguiente (Nivel 4)", "placeholder": "Seleccione la unidad subsiguiente…", "mainField": "nivel4", "metaField": "nivel4Cod"}], "resultField": "finalCode", "xlsxFilename": "CC.xlsx"}, "pas": {"label": "Programa (PAS)", "viewType": "cascade", "subLabel": "Seleccione en orden cada filtro para llegar al código final del programa", "resultLabel": "Código Final", "levels": [{"key": "agencia", "label": "Agencia", "placeholder": "Escriba o seleccione una agencia…", "mainField": "agenciaNombre", "metaField": "agencia"}, {"key": "prog", "label": "Programa", "placeholder": "Escriba o seleccione un programa…", "mainField": "progName", "metaField": "prog"}, {"key": "act", "label": "Actividad", "placeholder": "Escriba o seleccione una actividad…", "mainField": "actName", "metaField": "act"}, {"key": "serv", "label": "Servicio", "placeholder": "Escriba o seleccione un servicio…", "mainField": "servName", "metaField": "serv"}], "resultField": "code", "codeSearchNoun": "programa", "disclaimer": "Si busca un programa por el filtro de códigos, tenga en cuenta que si ese programa lo tiene más de una agencia, como el 1001 - Dirección y Administración General, el buscador le mostrará la primera que encuentre.", "xlsxFilename": "PAS.xlsx"}, "proyectos": {"label": "Proyectos", "titleLabel": "Nombre del Proyecto en PRIFAS", "subLabel": "Seleccione una agencia y luego un proyecto para ver su información", "nameField": "nombrePrifas", "idField": "proyectoKey", "stripPrefixRegex": "^$", "showClearFiltersButton": true, "copyableNameBox": true, "twoStepFilter": {"level1Field": "agencia", "level1Label": "Buscar agencia", "level1Placeholder": "Escriba el nombre de la agencia…", "level1StripPrefixRegex": "^\\d{7}\\s*-\\s*", "level1MetaField": "numero", "level2Field": "nombrePrifas", "level2Label": "Buscar proyecto", "level2Placeholder": "Escriba el nombre del proyecto…", "level2PlaceholderDisabled": "Primero seleccione una agencia…"}, "smallFields": [{"key": "numeroPrifas", "label": "Número de Proyecto en PRIFAS", "kind": "plain", "copyable": true}, {"key": "convOracle", "label": "Conversión de Oracle", "kind": "plain", "copyable": true}, {"key": "conv6", "label": "Conversión de Seis Dígitos de ORACLE", "kind": "plain", "copyable": true}], "xlsxFilename": "Proyectos.xlsx", "footerDisclaimer": "Este listado contiene únicamente los proyectos que fueron convertidos previo al go-live de INTEGRAPR. Las agencias que hayan creado nuevos proyectos luego del 7 de julio de 2026 no estarán en este listado."}, "admin": {"label": "Administrador", "viewType": "admin", "subLabel": "Vea, cree, cambie contraseñas o elimine accesos al sistema"}};
+const MODULES = {"inicio": {"label": "Inicio", "viewType": "home", "subLabel": "Bienvenido(a) a PASCCAL"}, "agencias": {"label": "Agencias", "titleLabel": "Nombre de la Entidad", "searchLabel": "Buscar agencia", "searchPlaceholder": "Escriba el nombre de la agencia…", "subLabel": "Busque una entidad para ver su información fiscal", "nameField": "nombre", "idField": "numEntidad", "stripPrefixRegex": "^\\d{7}\\s*-\\s*", "showClearFiltersButton": true, "copyableNameBox": true, "smallFields": [{"key": "numEntidad", "label": "Número de Entidad", "kind": "plain", "copyable": true}, {"key": "numUnidad", "label": "Número de Unidad", "kind": "plain", "copyable": true}, {"key": "planFiscal", "label": "Plan Fiscal", "kind": "tag"}, {"key": "faseERP", "label": "Fase en ERP", "kind": "tag", "prefix": "Fase "}, {"key": "fondo111", "label": "Recibe Fondo 111", "kind": "tag"}, {"key": "fondo141", "label": "Recibe Fondo 141", "kind": "tag"}, {"key": "fondoSRF", "label": "Recibe Fondos SRF", "kind": "tag"}, {"key": "fondoFed", "label": "Recibe Fondos Fed.", "kind": "tag"}, {"key": "prifas", "label": "Entidad en PRIFAS", "kind": "tag"}, {"key": "rhum", "label": "Entidad en RHUM", "kind": "tag"}, {"key": "ley73", "label": "Entidad bajo Ley 73", "kind": "tag"}, {"key": "ley8", "label": "Entidad bajo Ley 8", "kind": "tag"}, {"key": "remesa", "label": "Recibe Remesa", "kind": "tag", "noStretch": true}], "textFields": [{"key": "comentario", "label": "Comentario"}], "xlsxFilename": "Agencias.xlsx"}, "fondos": {"label": "Fondos", "titleLabel": "Alias del Fondo", "searchLabel": "Buscar fondo", "searchPlaceholder": "Escriba el nombre o número del fondo…", "subLabel": "Busque un fondo para ver su información", "nameField": "alias", "idField": "fondoNum", "stripPrefixRegex": "^\\d+\\s*-\\s*", "showClearFiltersButton": true, "copyableNameBox": true, "smallFields": [{"key": "fondoNum", "label": "Número de Fondo", "kind": "plain", "copyable": true}, {"key": "fondoEPM", "label": "Fondo en EPM", "kind": "tag"}, {"key": "fondoERP", "label": "Fondo en ERP", "kind": "tag", "breakAfter": true}, {"key": "clasifEPM", "label": "Clasificación en EPM", "kind": "tag", "tagClass": "tag-pink"}, {"key": "clasifERP_P1", "label": "Clasificación en ERP (Parent)", "kind": "tag"}, {"key": "clasifERP_C1", "label": "Clasificación en ERP (Child)", "kind": "tag"}], "textFields": [{"key": "leyCreacion", "label": "Ley u Orden de Creación (Original)"}, {"key": "uso", "label": "Uso"}], "xlsxFilename": "Fondos.xlsx"}, "conceptos": {"label": "Conceptos", "viewType": "list", "navGroup": "conceptos", "subLabel": "Listado completo de conceptos presupuestarios", "xlsxFilename": "Conceptos.xlsx", "columns": [{"key": "codigo", "label": "Código"}, {"key": "descripcion", "label": "Descripción"}], "splitCount": 10}, "conceptos_conversion": {"label": "Conversión", "parentLabel": "Conceptos", "navGroup": "conceptos", "titleLabel": "Concepto", "searchLabel": "Buscar concepto", "searchPlaceholder": "Escriba o seleccione un concepto…", "subLabel": "Busque un concepto para ver su conversión a ERP", "nameField": "concepto", "idField": "concepto", "searchMetaField": "conversionERP", "showClearFiltersButton": true, "smallFields": [{"key": "conversionERP", "label": "Conversión ERP", "kind": "plain"}], "xlsxFilename": "Conceptos_Conversion.xlsx"}, "objetos_conversion": {"label": "Conversión de Objetos", "parentLabel": "Objetos", "navGroup": "objetos", "titleLabel": "Objeto", "searchLabel": "Buscar objeto", "searchPlaceholder": "Escriba el nombre del objeto…", "subLabel": "Busque un objeto para ver su información de conversión", "nameField": "objeto", "idField": "oracle", "stripPrefixRegex": "^\\d+\\s*-\\s*", "stripSuffixRegex": "\\s*\\([^)]*\\)\\s*$", "showClearFiltersButton": true, "copyableNameBox": true, "smallFields": [{"key": "oracle", "label": "Código ORACLE", "kind": "plain", "copyable": true}, {"key": "prifas", "label": "Código PRIFAS", "kind": "plain", "copyable": true}, {"key": "tipo", "label": "Tipo", "kind": "tag"}], "xlsxFilename": "Conversion_Objetos.xlsx", "showConversionDiagram": true}, "objetos_reglamento49": {"label": "Reglamento 49", "parentLabel": "Objetos", "navGroup": "objetos", "viewType": "combo", "titleLabel": "Objeto de Gasto", "searchLabel": "Buscar objeto de gasto", "searchPlaceholder": "Escriba el nombre del objeto de gasto…", "subLabel": "Busque un objeto de gasto para ver todas sus combinaciones posibles de concepto", "nameField": "objetoGasto", "idField": "objetoGasto", "searchMetaField": "objetoERP", "stripPrefixRegex": "^\\d+\\s*-\\s*", "stripSuffixRegex": "\\s*\\([^)]*\\)\\s*$", "showClearFiltersButton": true, "copyableNameBox": true, "tableViewKey": "objetos_reglamento49_tabla", "smallFields": [{"key": "objeto", "label": "Objeto", "kind": "plain", "copyable": true}, {"key": "objetoERP", "label": "Objeto ERP", "kind": "plain", "copyable": true}], "comboColumns": [{"key": "concepto", "label": "Concepto"}, {"key": "descripcionConcepto", "label": "Descripción"}], "xlsxFilename": "Reglamento49.xlsx"}, "objetos_reglamento49_tabla": {"label": "Reglamento 49", "parentLabel": "Objetos", "navGroup": "objetos", "pillKey": "objetos_reglamento49", "backKey": "objetos_reglamento49", "viewType": "table", "dataKey": "objetos_reglamento49", "subLabel": "Tabla completa del Reglamento 49 con filtros por columna, como en Excel", "columns": [{"key": "objetoGasto", "label": "Objeto de Gasto", "width": "34%"}, {"key": "objeto", "label": "Objeto", "width": "9%"}, {"key": "objetoERP", "label": "Objeto ERP", "width": "11%"}, {"key": "concepto", "label": "Concepto", "width": "9%"}, {"key": "descripcionConcepto", "label": "Descripción", "width": "37%"}], "xlsxFilename": "Reglamento49.xlsx"}, "objetos_grupos_jsf": {"label": "Grupos JSF", "parentLabel": "Objetos", "navGroup": "objetos", "titleLabel": "Objeto", "subLabel": "Seleccione un objeto y luego un concepto para ver su agrupación JSF", "nameField": "objeto", "idField": "combinacionERP", "stripPrefixRegex": "^$", "stripSuffixRegex": "\\s*\\([^)]*\\)\\s*$", "showClearFiltersButton": true, "copyableNameBox": true, "twoStepFilter": {"level1Field": "objeto", "level1Label": "Buscar objeto", "level1Placeholder": "Escriba el nombre del objeto…", "level1StripPrefixRegex": "^$", "level1MetaField": "objetoERP", "level2Field": "conceptoDisplay", "level2Label": "Buscar concepto", "level2Placeholder": "Escriba o seleccione un concepto…", "level2PlaceholderDisabled": "Primero seleccione un objeto…"}, "smallFields": [{"key": "tipoJSF", "label": "Tipo JSF", "kind": "plain", "copyable": true}, {"key": "grupoJSF", "label": "Grupo JSF", "kind": "plain", "copyable": true}, {"key": "categoriaJSF", "label": "Categoría JSF", "kind": "plain", "copyable": true}], "xlsxFilename": "Grupos_JSF.xlsx"}, "objetos_grupos_jsf_listado": {"label": "Listado de Grupos JSF", "parentLabel": "Objetos", "navGroup": "objetos", "viewType": "list", "subLabel": "Listado completo de grupos JSF", "xlsxFilename": "Grupos_JSF_Listado.xlsx", "columns": [{"key": "grupo", "label": "Grupo"}, {"key": "descripcion", "label": "Descripción"}], "splitCount": 22}, "cc_agencias": {"label": "Centros de Costo - Agencias", "parentLabel": "Centros de Costo (CC)", "navGroup": "cc", "viewType": "cascade", "subLabel": "Seleccione en orden cada filtro para llegar al código final del centro de costo", "disclaimer": "Este buscador presenta únicamente Centros de Costo específicos de cada entidad, que incluyen Administrativos, Estratégicos y Operacionales.", "resultLabel": "Código Final", "levels": [{"key": "agencia", "label": "Agencia", "placeholder": "Escriba o seleccione una agencia…", "mainField": "agenciaNombre", "metaField": "agenciaCod"}, {"key": "tipo", "label": "Tipo de Componente", "placeholder": "Seleccione el tipo de componente…", "mainField": "tipo", "metaField": "tipoCod"}, {"key": "nivel2", "label": "Unidad Primaria (Nivel 2)", "placeholder": "Seleccione la unidad primaria…", "mainField": "nivel2", "metaField": "nivel2Cod"}, {"key": "nivel3", "label": "Unidad Secundaria (Nivel 3)", "placeholder": "Seleccione la unidad secundaria…", "mainField": "nivel3", "metaField": "nivel3Cod"}, {"key": "nivel4", "label": "Unidad Subsiguiente (Nivel 4)", "placeholder": "Seleccione la unidad subsiguiente…", "mainField": "nivel4", "metaField": "nivel4Cod"}], "resultField": "finalCode", "xlsxFilename": "CC.xlsx"}, "cc_catalogos": {"label": "Catálogos Administrativos y Estratégicos", "parentLabel": "Centros de Costo (CC)", "navGroup": "cc", "viewType": "cascade", "subLabel": "Seleccione en orden cada filtro para llegar al código final del catálogo", "disclaimer": "Este buscador presenta únicamente los Centros de Costo del catálogo Administrativo y Estratégico, que es compartido por todas las agencias.", "resultLabel": "Código Final", "levels": [{"key": "tipo", "label": "Tipo de Componente", "placeholder": "Seleccione el tipo de componente…", "mainField": "tipo", "metaField": "tipoCod"}, {"key": "nivel2", "label": "Unidad Primaria (Nivel 2)", "placeholder": "Seleccione la unidad primaria…", "mainField": "nivel2", "metaField": "nivel2Cod"}, {"key": "nivel3", "label": "Unidad Secundaria (Nivel 3)", "placeholder": "Seleccione la unidad secundaria…", "mainField": "nivel3", "metaField": "nivel3Cod"}, {"key": "nivel4", "label": "Unidad Subsiguiente (Nivel 4)", "placeholder": "Seleccione la unidad subsiguiente…", "mainField": "nivel4", "metaField": "nivel4Cod"}], "resultField": "finalCode", "xlsxFilename": "CC.xlsx"}, "pas": {"label": "Programa (PAS)", "viewType": "cascade", "subLabel": "Seleccione en orden cada filtro para llegar al código final del programa", "resultLabel": "Código Final", "levels": [{"key": "agencia", "label": "Agencia", "placeholder": "Escriba o seleccione una agencia…", "mainField": "agenciaNombre", "metaField": "agencia"}, {"key": "prog", "label": "Programa", "placeholder": "Escriba o seleccione un programa…", "mainField": "progName", "metaField": "prog"}, {"key": "act", "label": "Actividad", "placeholder": "Escriba o seleccione una actividad…", "mainField": "actName", "metaField": "act"}, {"key": "serv", "label": "Servicio", "placeholder": "Escriba o seleccione un servicio…", "mainField": "servName", "metaField": "serv"}], "resultField": "code", "codeSearchNoun": "programa", "disclaimer": "Si busca un programa por el filtro de códigos, tenga en cuenta que si ese programa lo tiene más de una agencia, como el 1001 - Dirección y Administración General, el buscador le mostrará la primera que encuentre.", "xlsxFilename": "PAS.xlsx"}, "proyectos": {"label": "Proyectos", "titleLabel": "Nombre del Proyecto en PRIFAS", "subLabel": "Seleccione una agencia y luego un proyecto para ver su información", "nameField": "nombrePrifas", "idField": "proyectoKey", "stripPrefixRegex": "^$", "showClearFiltersButton": true, "copyableNameBox": true, "twoStepFilter": {"level1Field": "agencia", "level1Label": "Buscar agencia", "level1Placeholder": "Escriba el nombre de la agencia…", "level1StripPrefixRegex": "^\\d{7}\\s*-\\s*", "level1MetaField": "numero", "level2Field": "nombrePrifas", "level2Label": "Buscar proyecto", "level2Placeholder": "Escriba el nombre del proyecto…", "level2PlaceholderDisabled": "Primero seleccione una agencia…"}, "smallFields": [{"key": "numeroPrifas", "label": "Número de Proyecto en PRIFAS", "kind": "plain", "copyable": true}, {"key": "convOracle", "label": "Conversión de Oracle", "kind": "plain", "copyable": true}, {"key": "conv6", "label": "Conversión de Seis Dígitos de ORACLE", "kind": "plain", "copyable": true}], "xlsxFilename": "Proyectos.xlsx", "footerDisclaimer": "Este listado contiene únicamente los proyectos que fueron convertidos previo al go-live de INTEGRAPR. Las agencias que hayan creado nuevos proyectos luego del 7 de julio de 2026 no estarán en este listado."}, "minutas": {"label": "Reuniones y Minutas", "viewType": "minutas", "subLabel": "Seleccione un día en el calendario para ver las reuniones y sus minutas"}, "admin": {"label": "Administrador", "viewType": "admin", "subLabel": "Vea, cree, cambie contraseñas o elimine accesos al sistema"}};
 const SUPABASE_URL = 'https://ezfhlucdojapxipxqrec.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_x_3MN2c3zil-cVntA03nDw_-K18Dzps'; /* clave pública (anon): sin sesión no da acceso a nada */
 const NAV_GROUPS = {
@@ -2252,6 +2403,7 @@ function switchModule(key){
     subtabRow.innerHTML = '';
   }
 
+  document.querySelector('.content-inner').classList.toggle('wide', m.viewType === 'minutas');
   document.getElementById('breadcrumbCurrent').textContent = m.label;
   document.getElementById('pageTitle').textContent = 'Panel de ' + m.label;
   document.getElementById('pageSub').textContent = m.subLabel;
@@ -2283,6 +2435,8 @@ function switchModule(key){
   cascadeView.style.display = 'none';
   soonView.style.display = 'none';
   adminView.style.display = 'none';
+  document.getElementById('minutasView').style.display = 'none';
+  try{ minCloseDetail(); }catch(e){ /* aún no inicializado durante la carga */ }
 
   if(m.viewType === 'home'){
     homeView.style.display = 'block';
@@ -2298,6 +2452,9 @@ function switchModule(key){
   } else if(m.viewType === 'soon'){
     soonView.style.display = 'block';
     document.getElementById('soonTitle').textContent = m.label;
+  } else if(m.viewType === 'minutas'){
+    document.getElementById('minutasView').style.display = 'block';
+    minEnter();
   } else if(m.viewType === 'admin'){
     adminView.style.display = 'block';
     switchAdminSubtab('accesos');
@@ -2446,6 +2603,264 @@ async function callSupabaseRpc(fn, body){
   return sbJson('/rest/v1/rpc/' + fn, { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(body || {}) });
 }
 
+
+/* ===== Reuniones y Minutas ===== */
+const MIN_MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const MIN_DOW = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const MIN_MAX_BYTES = 20 * 1024 * 1024;
+const minState = { items:[], year:0, month:0, selected:'', editing:null, file:null, pdfUrl:null, pdfItem:null, detailId:null, busy:false };
+function isEditor(){ return !!(authSession && (authSession.rol === 'admin' || authSession.editor)); }
+function minPad(n){ return String(n).padStart(2,'0'); }
+function minKey(y,m,d){ return y + '-' + minPad(m+1) + '-' + minPad(d); }
+function minTodayKey(){ const t = new Date(); return minKey(t.getFullYear(), t.getMonth(), t.getDate()); }
+function minFmtHora(h){
+  const m = /^(\d{1,2}):(\d{2})/.exec(h || ''); if(!m) return h || '';
+  let H = +m[1]; const ap = H >= 12 ? 'PM' : 'AM'; H = H % 12 || 12; return H + ':' + m[2] + ' ' + ap;
+}
+function minFmtFecha(k){
+  const p = k.split('-').map(Number); const dt = new Date(p[0], p[1]-1, p[2]);
+  const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  return dias[dt.getDay()] + ', ' + p[2] + ' de ' + MIN_MESES[p[1]-1].toLowerCase() + ' de ' + p[0];
+}
+function minUuid(){
+  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  const b = new Uint8Array(16); (window.crypto || {}).getRandomValues ? crypto.getRandomValues(b) : b.forEach((_,i)=>{ b[i] = Math.floor(Math.random()*256); });
+  b[6] = (b[6] & 15) | 64; b[8] = (b[8] & 63) | 128;
+  const h = Array.from(b, x => x.toString(16).padStart(2,'0')).join('');
+  return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+}
+function minReset(){
+  minState.items = []; minState.editing = null; minState.file = null;
+  minCloseDetail();
+  const f = document.getElementById('minFormModal'); if(f) f.style.display = 'none';
+  const l = document.getElementById('minDayList'); if(l) l.innerHTML = '';
+  const g = document.getElementById('minGrid'); if(g) g.innerHTML = '';
+}
+async function minLoad(){
+  minState.items = await sbJsonRetry('/rest/v1/reuniones?select=*&order=fecha.asc,hora.asc');
+}
+async function minEnter(){
+  if(!minState.year){
+    const t = new Date(); minState.year = t.getFullYear(); minState.month = t.getMonth(); minState.selected = minTodayKey();
+  }
+  minRender();
+  try{ await minLoad(); }catch(e){
+    if(!authSession) return;
+    document.getElementById('minDayList').innerHTML = '<div class="min-empty">No se pudieron cargar las reuniones. Intente de nuevo en un momento.</div>';
+    return;
+  }
+  minRender();
+}
+function minRender(){
+  const y = minState.year, mo = minState.month;
+  document.getElementById('minTitle').textContent = MIN_MESES[mo] + ' ' + y;
+  const counts = {}; minState.items.forEach(it=>{ (counts[it.fecha] = counts[it.fecha] || []).push(it); });
+  const first = new Date(y, mo, 1); const offset = (first.getDay() + 6) % 7;
+  const dim = new Date(y, mo + 1, 0).getDate(); const cells = Math.ceil((offset + dim) / 7) * 7;
+  const today = minTodayKey();
+  let html = MIN_DOW.map(d=>'<div class="min-dow">' + d + '</div>').join('');
+  for(let i = 0; i < cells; i++){
+    const dt = new Date(y, mo, 1 - offset + i);
+    const k = minKey(dt.getFullYear(), dt.getMonth(), dt.getDate());
+    const cls = ['min-day'];
+    if(dt.getMonth() !== mo) cls.push('out');
+    if(k === today) cls.push('today');
+    if(k === minState.selected) cls.push('sel');
+    const day = counts[k] || [];
+    if(day.length) cls.push('has');
+    let chips = day.slice(0, 2).map(it=>'<span class="min-chip">' + esc(minFmtHora(it.hora).replace(':00 ', ' ')) + ' · ' + esc(it.titulo) + '</span>').join('');
+    if(day.length > 2) chips += '<span class="min-more">+' + (day.length - 2) + ' más</span>';
+    html += '<button type="button" class="' + cls.join(' ') + '" data-k="' + k + '"><span class="min-dn">' + dt.getDate() + '</span>' + chips + '</button>';
+  }
+  document.getElementById('minGrid').innerHTML = html;
+  minRenderDay();
+}
+function minRenderDay(){
+  const k = minState.selected;
+  document.getElementById('minDayTitle').textContent = minFmtFecha(k);
+  document.getElementById('minAddBtn').style.display = isEditor() ? 'inline-block' : 'none';
+  const list = minState.items.filter(it => it.fecha === k);
+  const box = document.getElementById('minDayList');
+  if(!list.length){
+    box.innerHTML = '<div class="min-empty">No hay minutas para este día.' + (isEditor() ? ' Use “Añadir minuta” para subir una.' : '') + '</div>';
+    return;
+  }
+  box.innerHTML = list.map(it=>
+    '<div class="min-item"><div><div class="min-item-title">' + esc(it.titulo) + '</div><div class="min-item-sub">' + esc(minFmtHora(it.hora)) + (it.autor ? ' · Subida por ' + esc(it.autor) : '') + '</div></div>' +
+    '<button type="button" class="min-btn-sec" data-act="open" data-id="' + esc(it.id) + '">Ver</button></div>'
+  ).join('');
+}
+async function minPdfBlob(it){
+  const res = await sbFetch('/storage/v1/object/authenticated/minutas/' + encodeURIComponent(it.pdf_path));
+  if(!res.ok) throw new Error('No se pudo abrir el PDF.');
+  return new Blob([await res.arrayBuffer()], { type:'application/pdf' });
+}
+function minCloseDetail(){
+  const fr = document.getElementById('minDFrame'); if(fr) fr.removeAttribute('src');
+  if(minState.pdfUrl){ URL.revokeObjectURL(minState.pdfUrl); minState.pdfUrl = null; }
+  minState.detailId = null; minState.pdfItem = null;
+  const d = document.getElementById('minDetail'), l = document.getElementById('minListMode');
+  if(d) d.style.display = 'none';
+  if(l) l.style.display = '';
+}
+async function minOpenDetail(id){
+  const it = minState.items.find(x => x.id === id);
+  if(!it){ minCloseDetail(); return; }
+  const fr = document.getElementById('minDFrame'), load = document.getElementById('minDLoad');
+  fr.removeAttribute('src');
+  if(minState.pdfUrl){ URL.revokeObjectURL(minState.pdfUrl); minState.pdfUrl = null; }
+  minState.detailId = id; minState.pdfItem = it;
+  document.getElementById('minListMode').style.display = 'none';
+  document.getElementById('minDetail').style.display = 'block';
+  document.getElementById('minDTitle').textContent = it.titulo;
+  document.getElementById('minDHora').textContent = minFmtHora(it.hora);
+  document.getElementById('minDFecha').textContent = minFmtFecha(it.fecha) + (it.autor ? ' · Subida por ' + it.autor : '');
+  let b = '';
+  if(it.resumen) b += '<div class="min-lbl">Resumen</div><div class="min-txt">' + esc(it.resumen) + '</div>';
+  if(it.participantes) b += '<div class="min-lbl">Participantes</div><div class="min-txt">' + esc(it.participantes) + '</div>';
+  if(it.notas) b += '<div class="min-lbl">Notas</div><div class="min-txt">' + esc(it.notas) + '</div>';
+  document.getElementById('minDBody').innerHTML = b;
+  document.getElementById('minDEdit').style.display = isEditor() ? 'inline-block' : 'none';
+  document.getElementById('minDDel').style.display = isEditor() ? 'inline-block' : 'none';
+  const sc = document.querySelector('.content'); if(sc) sc.scrollTop = 0;
+  load.style.display = 'block'; load.textContent = 'Cargando PDF…';
+  try{
+    const blob = await minPdfBlob(it);
+    if(minState.detailId !== id) return;
+    minState.pdfUrl = URL.createObjectURL(blob);
+    fr.src = minState.pdfUrl + '#toolbar=1&navpanes=0&view=FitH';
+    load.style.display = 'none';
+  }catch(e){ load.textContent = 'No se pudo cargar el PDF. Intente de nuevo o use Descargar PDF.'; }
+}
+async function minDownload(it){
+  try{
+    const blob = await minPdfBlob(it); const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = it.pdf_name || 'minuta.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=> URL.revokeObjectURL(url), 4000);
+  }catch(e){ alert(e.message || 'No se pudo descargar el PDF.'); }
+}
+function minStorageDelete(path){
+  return sbFetch('/storage/v1/object/minutas/' + encodeURIComponent(path), { method:'DELETE' }).catch(()=>{});
+}
+function minSetFile(file){
+  minState.file = file || null;
+  document.getElementById('minDropName').textContent = file ? file.name : (minState.editing ? 'Reemplazar el PDF (opcional)' : 'Arrastre el PDF aquí o haga clic para elegirlo');
+  document.getElementById('minDropSub').textContent = file ? (Math.round(file.size / 1024) + ' KB') : 'Máximo 20 MB';
+}
+function minOpenForm(it){
+  minState.editing = it || null; minState.file = null;
+  document.getElementById('minFormTitle').textContent = it ? 'Editar minuta' : 'Añadir minuta';
+  document.getElementById('minTituloIn').value = it ? it.titulo : '';
+  document.getElementById('minFechaIn').value = minFmtFecha(it ? it.fecha : minState.selected);
+  document.getElementById('minHoraIn').value = it ? String(it.hora).slice(0,5) : '';
+  document.getElementById('minNotasIn').value = it ? (it.notas || '') : '';
+  document.getElementById('minResumenIn').value = it ? (it.resumen || '') : '';
+  document.getElementById('minPartIn').value = it ? (it.participantes || '') : '';
+  document.getElementById('minAutorIn').value = it ? (it.autor || '') : '';
+  document.getElementById('minFileIn').value = '';
+  document.getElementById('minErr').textContent = '';
+  minSetFile(null);
+  document.getElementById('minPdfReq').style.display = it ? 'none' : 'inline';
+  document.getElementById('minFormModal').style.display = 'flex';
+  document.getElementById('minTituloIn').focus();
+}
+function minCloseForm(){ document.getElementById('minFormModal').style.display = 'none'; minState.editing = null; minState.file = null; }
+async function minValidatePdf(file){
+  if(!file) return null;
+  if(!/\.pdf$/i.test(file.name) || (file.type && file.type !== 'application/pdf')) return 'El archivo debe ser un PDF.';
+  if(file.size > MIN_MAX_BYTES) return 'El PDF supera los 20 MB.';
+  const head = new Uint8Array(await file.slice(0, 5).arrayBuffer());
+  if(String.fromCharCode.apply(null, head) !== '%PDF-') return 'El archivo no es un PDF válido.';
+  return null;
+}
+async function minSave(){
+  if(minState.busy) return;
+  const err = document.getElementById('minErr'); err.textContent = '';
+  const titulo = document.getElementById('minTituloIn').value.trim();
+  const hora = document.getElementById('minHoraIn').value;
+  if(!titulo){ err.textContent = 'Escriba el título de la reunión.'; return; }
+  if(!hora){ err.textContent = 'Seleccione la hora.'; return; }
+  const autor = document.getElementById('minAutorIn').value.trim();
+  if(!autor){ err.textContent = 'Escriba el nombre de quien creó y subió la minuta.'; return; }
+  const editing = minState.editing; const file = minState.file;
+  if(!editing && !file){ err.textContent = 'Adjunte el PDF de la minuta.'; return; }
+  const ferr = await minValidatePdf(file); if(ferr){ err.textContent = ferr; return; }
+  minState.busy = true;
+  const btn = document.getElementById('minSaveBtn'); btn.textContent = 'Guardando…'; btn.disabled = true;
+  let newPath = null;
+  try{
+    if(file){
+      newPath = minUuid() + '.pdf';
+      const up = await sbFetch('/storage/v1/object/minutas/' + newPath, { method:'POST', headers:{ 'Content-Type':'application/pdf', 'x-upsert':'false' }, body:file });
+      if(!up.ok) throw new Error('No se pudo subir el PDF.');
+    }
+    const body = {
+      p_hora: hora, p_titulo: titulo,
+      p_notas: document.getElementById('minNotasIn').value,
+      p_resumen: document.getElementById('minResumenIn').value,
+      p_participantes: document.getElementById('minPartIn').value,
+      p_pdf_path: newPath, p_pdf_name: file ? file.name.slice(0, 200) : null,
+      p_autor: autor
+    };
+    if(editing){
+      body.p_id = editing.id;
+      const old = await callSupabaseRpc('minuta_update', body);
+      if(old) minStorageDelete(old);
+    } else {
+      body.p_fecha = minState.selected;
+      await callSupabaseRpc('minuta_create', body);
+    }
+    minCloseForm();
+    await minLoad(); minRender();
+    if(minState.detailId) minOpenDetail(minState.detailId);
+  }catch(e){
+    if(newPath) minStorageDelete(newPath);
+    err.textContent = (e && e.message) || 'No se pudo guardar la minuta.';
+  }finally{
+    minState.busy = false; btn.textContent = 'Guardar minuta'; btn.disabled = false;
+  }
+}
+async function minDelete(it){
+  if(!confirm('¿Eliminar la minuta "' + it.titulo + '"? Esta acción no se puede deshacer.')) return;
+  try{
+    const old = await callSupabaseRpc('minuta_delete', { p_id: it.id });
+    if(old) await minStorageDelete(old);
+    minCloseDetail();
+    await minLoad(); minRender();
+  }catch(e){ alert((e && e.message) || 'No se pudo eliminar la minuta.'); }
+}
+document.getElementById('minPrev').addEventListener('click', ()=>{ minState.month--; if(minState.month < 0){ minState.month = 11; minState.year--; } minRender(); });
+document.getElementById('minNext').addEventListener('click', ()=>{ minState.month++; if(minState.month > 11){ minState.month = 0; minState.year++; } minRender(); });
+document.getElementById('minToday').addEventListener('click', ()=>{ const t = new Date(); minState.year = t.getFullYear(); minState.month = t.getMonth(); minState.selected = minTodayKey(); minRender(); });
+document.getElementById('minGrid').addEventListener('click', e=>{
+  const b = e.target.closest('.min-day'); if(!b) return;
+  minState.selected = b.dataset.k;
+  const p = b.dataset.k.split('-').map(Number); minState.year = p[0]; minState.month = p[1] - 1;
+  minRender();
+});
+document.getElementById('minDayList').addEventListener('click', e=>{
+  const b = e.target.closest('button[data-act]'); if(!b) return;
+  const it = minState.items.find(x => x.id === b.dataset.id); if(!it) return;
+  if(b.dataset.act === 'open') minOpenDetail(it.id);
+});
+document.getElementById('minAddBtn').addEventListener('click', ()=>{ if(isEditor()) minOpenForm(null); });
+document.getElementById('minCancelBtn').addEventListener('click', minCloseForm);
+document.getElementById('minSaveBtn').addEventListener('click', minSave);
+document.getElementById('minBack').addEventListener('click', minCloseDetail);
+document.getElementById('minDDl').addEventListener('click', ()=>{ if(minState.pdfItem) minDownload(minState.pdfItem); });
+document.getElementById('minDEdit').addEventListener('click', ()=>{ if(isEditor() && minState.pdfItem) minOpenForm(minState.pdfItem); });
+document.getElementById('minDDel').addEventListener('click', ()=>{ if(isEditor() && minState.pdfItem) minDelete(minState.pdfItem); });
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && document.getElementById('minFormModal').style.display !== 'none') minCloseForm();
+});
+const minDrop = document.getElementById('minDrop'), minFileIn = document.getElementById('minFileIn');
+minDrop.addEventListener('click', ()=> minFileIn.click());
+minFileIn.addEventListener('change', ()=> minSetFile(minFileIn.files[0] || null));
+['dragenter','dragover'].forEach(ev=> minDrop.addEventListener(ev, e=>{ e.preventDefault(); minDrop.classList.add('drag'); }));
+['dragleave','drop'].forEach(ev=> minDrop.addEventListener(ev, e=>{ e.preventDefault(); minDrop.classList.remove('drag'); }));
+minDrop.addEventListener('drop', e=>{ const f = e.dataTransfer && e.dataTransfer.files[0]; if(f) minSetFile(f); });
+
 const loginScreen = document.getElementById('loginScreen');
 const appRoot = document.getElementById('appRoot');
 const loginForm = document.getElementById('loginForm');
@@ -2468,13 +2883,14 @@ function showLogin(){
 }
 
 async function fetchProfile(){
-  const res = await sbFetch('/rest/v1/accesos?select=usuario,entidad,rol,activo&user_id=eq.' + encodeURIComponent(authSession.user_id));
+  const res = await sbFetch('/rest/v1/accesos?select=usuario,entidad,rol,activo,editor_minutas&user_id=eq.' + encodeURIComponent(authSession.user_id));
   let rows = [];
   try{ rows = await res.json(); }catch(e){}
   if(!res.ok || !Array.isArray(rows) || !rows.length || !rows[0].activo) throw new Error('Esta cuenta no está autorizada para usar la herramienta.');
   authSession.usuario = rows[0].usuario;
   authSession.entidad = rows[0].entidad;
   authSession.rol = rows[0].rol;
+  authSession.editor = !!rows[0].editor_minutas;
   persistAuth();
 }
 
@@ -2563,6 +2979,7 @@ function showApp(){
 function resetInMemoryData(){
   Object.keys(MODULE_DATA).forEach(k=>{ MODULE_DATA[k] = []; });
   Object.keys(fileCache).forEach(k=>{ delete fileCache[k]; });
+  if(typeof minReset === 'function') minReset();
   ['homeDiagramImg','conversionDiagramImg'].forEach(id=>{ const i = document.getElementById(id); if(i){ i.removeAttribute('src'); i.style.display = 'none'; } });
   if(newsList) newsList.innerHTML = '';
   if(newsAdminList) newsAdminList.innerHTML = '';
